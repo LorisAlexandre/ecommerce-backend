@@ -20,8 +20,11 @@ export class Article {
   @Prop({ required: true })
   story: string;
 
-  @Prop({ required: true, unique: true })
-  topographicMap: string;
+  @Prop({ required: true, unique: true, type: Object })
+  topographicMap?: {
+    url: string;
+    public_id: string;
+  };
 
   @Prop({ required: true })
   price: number;
@@ -36,7 +39,7 @@ export class Article {
   };
 
   @Prop({ required: true })
-  collection: string;
+  suite: string;
 }
 
 export const ArticleSchema = SchemaFactory.createForClass(Article);

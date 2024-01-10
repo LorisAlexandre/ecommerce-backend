@@ -19,6 +19,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: { sub: string; email: string; role: string }) {
+    if (payload.role !== 'admin') throw new UnauthorizedException();
     const user = await this.userInfosModel
       .findOne({ email: payload.email, role: payload.role })
       .populate('settings')

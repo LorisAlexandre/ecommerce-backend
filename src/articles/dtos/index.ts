@@ -1,1 +1,2 @@
-export * from './ArticleDto';
+export * from './CreateArticleDto';
+export * from './UpdateArticleDto';

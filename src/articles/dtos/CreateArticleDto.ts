@@ -6,7 +6,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 
-export class ArticleDto {
+export class CreateArticleDto {
   @IsNotEmpty()
   @IsString()
   cityName: string;
@@ -31,27 +31,23 @@ export class ArticleDto {
   @IsString()
   story: string;
 
-  @IsNotEmpty()
-  @IsString()
-  topographicMap: string;
+  // @IsNotEmpty()
+  // @IsNumber()
+  // price: number;
 
-  @IsNotEmpty()
-  @IsNumber()
-  price: number;
+  // @IsNotEmpty()
+  // @IsNumber()
+  // stock: number;
 
-  @IsNotEmpty()
-  @IsNumber()
-  stock: number;
-
-  @IsNotEmpty()
-  @IsObject()
-  @ValidateNested()
-  dimension: {
-    width: number;
-    height: number;
-  };
+  // @IsNotEmpty()
+  // @IsObject()
+  // @ValidateNested()
+  // dimension: {
+  //   width: number;
+  //   height: number;
+  // };
 
   @IsNotEmpty()
   @IsString()
-  collection: string;
+  suite: string;
 }

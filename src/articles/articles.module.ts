@@ -2,9 +2,11 @@ import { Module } from '@nestjs/common';
 import { MongooseModelsModule } from 'src/mongoose/mongoose.module';
 import { ArticlesControllers } from './articles.controllers';
 import { ArticlesServices } from './articles.services';
+import { ConfigModule } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [MongooseModelsModule],
+  imports: [MongooseModelsModule, ConfigModule, JwtModule],
   controllers: [ArticlesControllers],
   providers: [ArticlesServices],
 })
