@@ -1,5 +1,4 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { UserInfos } from './UserInfos.schema';
 
 @Schema()
 export class UserLoginInfos {

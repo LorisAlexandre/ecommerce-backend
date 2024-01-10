@@ -15,7 +15,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateArticleDto, UpdateArticleDto } from './dtos';
 import { ArticlesServices } from './articles.services';
-import { FileInterceptor, NoFilesInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('articles')
 export class ArticlesControllers {
@@ -24,8 +24,8 @@ export class ArticlesControllers {
     @InjectModel(Article.name) private articleModel = Model<Article>,
   ) {}
 
-  // @UseGuards(JwtGuard)
-  // @UseGuards(RolesGuard)
+  @UseGuards(JwtGuard)
+  @UseGuards(RolesGuard)
   @UseInterceptors(FileInterceptor('topographicMap'))
   @Post('create')
   createArticle(
@@ -35,8 +35,8 @@ export class ArticlesControllers {
     return this.articlesServices.createArticle(createArticleDto, file);
   }
 
-  // @UseGuards(JwtGuard)
-  // @UseGuards(RolesGuard)
+  @UseGuards(JwtGuard)
+  @UseGuards(RolesGuard)
   @UseInterceptors(FileInterceptor('topographicMap'))
   @Post('update/:id')
   updateArticle(
@@ -48,8 +48,8 @@ export class ArticlesControllers {
     return this.articlesServices.updateArticle(id, updateArticleDto, file);
   }
 
-  // @UseGuards(JwtGuard)
-  // @UseGuards(RolesGuard)
+  @UseGuards(JwtGuard)
+  @UseGuards(RolesGuard)
   @Delete('delete/:id')
   deleteArticle(@Param('id') id: string) {
     return this.articlesServices.deleteArticle(id);

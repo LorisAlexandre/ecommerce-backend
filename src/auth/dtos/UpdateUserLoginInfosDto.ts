@@ -1,22 +1,17 @@
 import {
   IsEmail,
-  IsEnum,
-  IsNotEmpty,
+  IsOptional,
   IsString,
   IsStrongPassword,
 } from 'class-validator';
 
-export class SigninDto {
-  @IsNotEmpty()
+export class UpdateUserLoginInfosDto {
+  @IsOptional()
   @IsEmail()
   email: string;
 
-  @IsNotEmpty()
-  @IsString()
+  @IsOptional()
   // @IsStrongPassword()
+  @IsString()
   password: string;
-
-  @IsEnum(['user', 'admin'])
-  @IsNotEmpty()
-  role: string;
 }

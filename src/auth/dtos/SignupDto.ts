@@ -6,6 +6,7 @@ import {
   IsOptional,
   IsPhoneNumber,
   IsString,
+  IsStrongPassword,
   ValidateNested,
 } from 'class-validator';
 
@@ -41,6 +42,7 @@ export class SignupDto {
 
   @IsString()
   @IsNotEmpty()
+  // @IsStrongPassword()
   password: string;
 
   @IsString()
