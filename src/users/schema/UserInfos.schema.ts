@@ -16,8 +16,8 @@ export class UserInfos {
   @Prop()
   username: string;
 
-  @Prop({ unique: true })
-  phone: string;
+  @Prop({ required: false })
+  phone?: string;
 
   @Prop({ default: 'user', enum: ['user', 'admin'], required: true })
   role: string;

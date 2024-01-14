@@ -1,22 +1,15 @@
 import {
   CanActivate,
   ExecutionContext,
-  Header,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { PassportStrategy } from '@nestjs/passport';
-import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-  constructor(
-    configService: ConfigService,
-    private jwt: JwtService,
-  ) {}
+  constructor(private jwt: JwtService) {}
 
   canActivate(
     context: ExecutionContext,

@@ -70,7 +70,7 @@ export class AuthServices {
         access_token,
       };
     } catch (error) {
-      return error;
+      return { error, result: false };
     }
   }
 

@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Article, ArticleSchema } from 'src/articles/schema';
+import { Order, OrderSchema } from 'src/orders/schema';
 import {
   User,
   UserInfos,
@@ -34,6 +35,10 @@ import {
       {
         name: Article.name,
         schema: ArticleSchema,
+      },
+      {
+        name: Order.name,
+        schema: OrderSchema,
       },
     ]),
   ],

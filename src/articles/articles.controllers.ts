@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   UploadedFile,
   UseGuards,
@@ -38,7 +39,7 @@ export class ArticlesControllers {
   @UseGuards(JwtGuard)
   @UseGuards(RolesGuard)
   @UseInterceptors(FileInterceptor('topographicMap'))
-  @Post('update/:id')
+  @Patch('update/:id')
   updateArticle(
     @Param('id') id: string,
     @Body()

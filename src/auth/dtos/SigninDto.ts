@@ -2,6 +2,7 @@ import {
   IsEmail,
   IsEnum,
   IsNotEmpty,
+  IsOptional,
   IsString,
   IsStrongPassword,
 } from 'class-validator';
@@ -17,6 +18,6 @@ export class SigninDto {
   password: string;
 
   @IsEnum(['user', 'admin'])
-  @IsNotEmpty()
+  @IsOptional()
   role: string;
 }
