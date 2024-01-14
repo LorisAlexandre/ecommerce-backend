@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { MongooseModelsModule } from 'src/mongoose/mongoose.module';
+import { MongooseModelsModule } from 'src/mongoose/mongooseModels.module';
 import { ArticlesControllers } from './articles.controllers';
 import { ArticlesServices } from './articles.services';
 import { ConfigModule } from '@nestjs/config';

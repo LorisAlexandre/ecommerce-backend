@@ -6,7 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { WebSocketModule } from './websocket/websocket.module';
 import { ArticlesModule } from './articles/articles.module';
 import { CloudinaryModule } from 'nestjs-cloudinary';
-import { MongooseModelsModule } from './mongoose/mongoose.module';
+import { MongooseModelsModule } from './mongoose/mongooseModels.module';
 
 @Module({
   imports: [
