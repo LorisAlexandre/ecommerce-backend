@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { MyWebSocketGateway } from './websocket.gateway';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { IpAddressInterceptor } from './interceptor';
@@ -10,7 +10,7 @@ import { ConfigModule } from '@nestjs/config';
   controllers: [],
   providers: [
     MyWebSocketGateway,
-    { provide: APP_INTERCEPTOR, useClass: IpAddressInterceptor },
+    { provide: WebSocketModule, useClass: IpAddressInterceptor },
     IpAddressService,
   ],
 })
