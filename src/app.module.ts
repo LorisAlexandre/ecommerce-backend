@@ -30,8 +30,7 @@ import { MongooseModelsModule } from './mongoose/mongooseModels.module';
     UsersModule,
     AuthModule,
     ArticlesModule,
-    WebSocketModule,
-    MongooseModelsModule,
+    // WebSocketModule, WebSocket not support on Vercel, fix it later
   ],
   controllers: [],
   providers: [],
