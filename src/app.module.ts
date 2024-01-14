@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { WebSocketModule } from './websocket/websocket.module';
 import { ArticlesModule } from './articles/articles.module';
 import { CloudinaryModule } from 'nestjs-cloudinary';
+import { MongooseModelsModule } from './mongoose/mongoose.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { CloudinaryModule } from 'nestjs-cloudinary';
     AuthModule,
     ArticlesModule,
     WebSocketModule,
+    MongooseModelsModule,
   ],
   controllers: [],
   providers: [],
