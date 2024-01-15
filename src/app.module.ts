@@ -8,6 +8,7 @@ import { ArticlesModule } from './articles/articles.module';
 import { CloudinaryModule } from 'nestjs-cloudinary';
 import { MongooseModelsModule } from './mongoose/mongooseModels.module';
 import { OrdersModule } from './orders/orders.module';
+import { StripeModule } from './stripe/stripe.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { OrdersModule } from './orders/orders.module';
     ArticlesModule,
     // WebSocketModule, WebSocket not support on Vercel, fix it later alt: Pusher
     OrdersModule,
+    StripeModule,
   ],
   controllers: [],
   providers: [],
