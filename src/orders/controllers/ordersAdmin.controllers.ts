@@ -3,6 +3,7 @@ import {
   Get,
   Param,
   ParseArrayPipe,
+  Patch,
   Query,
   UseGuards,
 } from '@nestjs/common';
@@ -82,5 +83,10 @@ export class OrdersAdminController {
   @Get('articlesDetails')
   getArticlesDetails() {
     return this.ordersAdminServices.getArticlesDetails();
+  }
+
+  @Patch('updateStatus/:id')
+  updateStatus(@Param('id') id: string) {
+    return this.ordersAdminServices.updateStatus(id);
   }
 }

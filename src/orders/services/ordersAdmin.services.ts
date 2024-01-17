@@ -202,4 +202,20 @@ export class OrdersAdminServices {
       return { error };
     }
   }
+
+  async updateStatus(id: string) {
+    try {
+      const order = await this.orderModel.findByIdAndUpdate(
+        id,
+        {
+          'parcel.status': 'sent',
+        },
+        { new: true },
+      );
+
+      return { result: true, order };
+    } catch (error) {
+      return { error };
+    }
+  }
 }
