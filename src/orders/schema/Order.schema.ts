@@ -41,7 +41,7 @@ export class Order {
     status: {
       type: string;
       required: true;
-      enum: ['delivered', 'transit', 'creation'];
+      enum: ['creation', 'sent', 'transit', 'delivered'];
       default: 'creation';
     };
   };
