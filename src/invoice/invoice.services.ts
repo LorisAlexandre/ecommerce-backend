@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InvoiceDto } from './dtos';
-import * as PDFDocument from 'pdfkit';
 import { CloudinaryService } from 'nestjs-cloudinary';
 
 @Injectable()
@@ -71,7 +70,12 @@ export class InvoiceServices {
     return invoice;
   }
 
-  async createPdf(invoice) {}
+  async createPdf(invoice: string) {
+    const file = Buffer.from(invoice);
+    const uploadedFile = await this.uploadFile(file);
+
+    return { uploadedFile, result: true };
+  }
 
   uploadFile(fileBuffer: Buffer) {
     return new Promise((resolve, reject) => {
@@ -79,6 +83,7 @@ export class InvoiceServices {
         .upload_stream(
           {
             resource_type: 'auto',
+            folder: 'invoice',
           },
           (err, result) => {
             if (err) reject(err);
