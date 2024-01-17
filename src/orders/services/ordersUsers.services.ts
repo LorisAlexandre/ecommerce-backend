@@ -3,19 +3,41 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Order } from '../schema';
 import { Model } from 'mongoose';
 import { CreateOrderDto } from '../dtos';
+import { InvoiceServices } from 'src/invoice/invoice.services';
 
 @Injectable()
 export class OrdersUsersServices {
-  constructor(@InjectModel(Order.name) private orderModel: Model<Order>) {}
+  constructor(
+    @InjectModel(Order.name) private orderModel: Model<Order>,
+    private invoiceServices: InvoiceServices,
+  ) {}
 
   async createOrder(createOrderDto: CreateOrderDto) {
     try {
-      console.log(createOrderDto);
+      // créer l'order
+      const newOrder = await new this.orderModel(createOrderDto);
+      // update les infos manquantes invoice
+      const invoice = await this.invoiceServices.createInvoice({
+        date: new Date(String(newOrder.purchaseDate)),
+        order: newOrder._id.toString(),
+        price: createOrderDto.price,
+        shippingFees: createOrderDto.shippingFees,
+        articles: [...createOrderDto.articles],
+      });
 
-      const newOrder = new this.orderModel(createOrderDto);
-      const savedOrder = await newOrder.save();
+      if (invoice.result) {
+        const uploadedFile = await this.invoiceServices.createPdf(
+          invoice.invoice,
+        );
+        if (uploadedFile.result) {
+          newOrder.invoice = { ...uploadedFile.uploadedFile };
+          const savedOrder = await newOrder.save();
 
-      return { result: true, savedOrder };
+          return { result: true, savedOrder };
+        }
+        return uploadedFile;
+      }
+      return invoice;
     } catch (error) {
       return { error };
     }

@@ -6,7 +6,8 @@ import { CloudinaryService } from 'nestjs-cloudinary';
 export class InvoiceServices {
   constructor(private cloudinaryService: CloudinaryService) {}
   createInvoice(invoiceDto: InvoiceDto) {
-    const invoice = `
+    try {
+      const invoice = `
 <html>
   <head>
     <style>
@@ -22,6 +23,9 @@ export class InvoiceServices {
         align-items: center;
         max-width: 350px;
         margin: 1rem 0;
+      }
+      h2 {
+        text-align: center;
       }
       table {
         width: 75%;
@@ -39,7 +43,13 @@ export class InvoiceServices {
   <body>
     <h1>Mugensei</h1>
     <br />
-    <h2>Facture - ${invoiceDto.date}</h2>
+    <h2>Facture - ${String(invoiceDto.date.getDate() + 1).padStart(
+      2,
+      '0',
+    )}/${String(invoiceDto.date.getMonth() + 1).padStart(
+      2,
+      '0',
+    )}/${invoiceDto.date.getFullYear()}</h2>
     <table>
       <tbody>
         ${invoiceDto.articles.map(
@@ -63,21 +73,32 @@ export class InvoiceServices {
     <h3>Payé €${invoiceDto.price}</h3>
     <br />
     <h2>Commande n°${invoiceDto.order}</h2>
-    <a href="${invoiceDto.orderUrl}" target="_blank">Suivre colis</a>
   </body>
 </html>
 `;
-    return invoice;
+      return { invoice, result: true };
+    } catch (error) {
+      return { error };
+    }
   }
 
   async createPdf(invoice: string) {
-    const file = Buffer.from(invoice);
-    const uploadedFile = await this.uploadFile(file);
+    try {
+      const file = Buffer.from(invoice);
+      const uploadedFile = await this.uploadFile(file);
 
-    return { uploadedFile, result: true };
+      return { uploadedFile, result: true };
+    } catch (error) {
+      return { error };
+    }
   }
 
-  uploadFile(fileBuffer: Buffer) {
+  uploadFile(
+    fileBuffer: Buffer,
+  ): Promise<
+    | { url: string; public_id: string }
+    | { err: Error; url: string; public_id: string }
+  > {
     return new Promise((resolve, reject) => {
       this.cloudinaryService.cloudinary.uploader
         .upload_stream(

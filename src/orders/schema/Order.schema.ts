@@ -30,23 +30,23 @@ export class Order {
   @Prop({ required: true })
   shippingFees: number;
 
-  @Prop({ type: Object, required: true })
+  @Prop({ type: Object, required: false })
   parcel: {
-    id: { type: string; required: true };
-    trackingNumber: { type: string; required: true };
+    id: { type: string; required: false };
+    trackingNumber: { type: string; required: false };
     label: {
       url: string;
       public_id: string;
     };
     status: {
       type: string;
-      required: true;
+      required: false;
       enum: ['creation', 'sent', 'transit', 'delivered'];
       default: 'creation';
     };
   };
 
-  @Prop({ required: true, type: Object })
+  @Prop({ required: false, type: Object })
   invoice: {
     url: string;
     public_id: string;

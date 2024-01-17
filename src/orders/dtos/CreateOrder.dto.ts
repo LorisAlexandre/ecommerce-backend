@@ -2,15 +2,21 @@ import {
   IsArray,
   IsNumber,
   IsObject,
+  IsOptional,
   IsString,
   ValidateNested,
 } from 'class-validator';
+import { Article } from 'src/articles/schema';
 
 export class CreateOrderDto {
   userInfos: string;
 
-  @IsString()
-  invoice: string;
+  @IsObject()
+  @IsOptional()
+  invoice: {
+    url: string;
+    public_id: string;
+  };
 
   @IsNumber()
   price: number;
@@ -19,7 +25,7 @@ export class CreateOrderDto {
   shippingFees: number;
 
   @IsObject()
-  @ValidateNested()
+  @IsOptional()
   parcel: {
     id: string;
     trackingNumber: string;
@@ -40,7 +46,7 @@ export class CreateOrderDto {
   @ValidateNested()
   articles: [
     {
-      id: string;
+      article: Article;
       quantity: number;
     },
   ];
