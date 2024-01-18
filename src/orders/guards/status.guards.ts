@@ -13,7 +13,7 @@ export class StatusGuard implements CanActivate {
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request: Request = context.switchToHttp().getRequest();
-    const status = ['delivered', 'transit', 'creation'];
+    const status = ['creation', 'sent', 'transit', 'delivered'];
     const param = request.params;
 
     if (!status.includes(param.status))

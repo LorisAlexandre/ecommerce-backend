@@ -71,7 +71,7 @@ export class ArticlesServices {
   async getAllArticles() {
     try {
       const articles = await this.articleModel.find();
-      if (articles.length) throw new HttpException('No Article yet', 404);
+      if (!articles.length) throw new HttpException('No Article yet', 404);
       return { result: true, articles };
     } catch {
       throw new HttpException('Article not found', 404);
@@ -84,6 +84,39 @@ export class ArticlesServices {
       return { result: true, article };
     } catch {
       throw new HttpException('Article not found', 404);
+    }
+  }
+
+  async getByCollection(suite: string) {
+    try {
+      const articles = await this.articleModel.find({ suite });
+
+      return { result: true, articles };
+    } catch (error) {
+      return { error };
+    }
+  }
+
+  async getLastArticle() {
+    try {
+      const article = await this.articleModel
+        .find()
+        .sort({ cityName: -1 })
+        .limit(1);
+
+      return { result: true, article };
+    } catch (error) {
+      return { error };
+    }
+  }
+
+  async getLastCollection() {
+    try {
+      const lastCollection = await this.articleModel.find().sort({ suite: -1 });
+
+      return { result: true, lastCollection };
+    } catch (error) {
+      return { error };
     }
   }
 

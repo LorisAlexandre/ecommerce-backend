@@ -11,19 +11,13 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { JwtGuard, RolesGuard } from 'src/auth/guards';
-import { Article } from './schema';
-import { Model } from 'mongoose';
-import { InjectModel } from '@nestjs/mongoose';
 import { CreateArticleDto, UpdateArticleDto } from './dtos';
 import { ArticlesServices } from './articles.services';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('articles')
 export class ArticlesControllers {
-  constructor(
-    private articlesServices: ArticlesServices,
-    @InjectModel(Article.name) private articleModel = Model<Article>,
-  ) {}
+  constructor(private articlesServices: ArticlesServices) {}
 
   @UseGuards(JwtGuard)
   @UseGuards(RolesGuard)
@@ -57,12 +51,27 @@ export class ArticlesControllers {
   }
 
   @Get('all')
-  async getAllrticles() {
+  getAllArticles() {
     return this.articlesServices.getAllArticles();
   }
 
-  @Get(':id')
+  @Get('byId/:id')
   getById(@Param('id') id: string) {
     return this.articlesServices.getById(id);
+  }
+
+  @Get('byCollection/:suite')
+  getByCollection(@Param('suite') suite: string) {
+    return this.articlesServices.getByCollection(suite);
+  }
+
+  @Get('lastArticle')
+  getLastArticle() {
+    return this.articlesServices.getLastArticle();
+  }
+
+  @Get('lastCollection')
+  getLastCollection() {
+    return this.articlesServices.getLastCollection();
   }
 }

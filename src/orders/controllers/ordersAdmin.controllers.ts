@@ -1,17 +1,10 @@
-import {
-  Controller,
-  Get,
-  Param,
-  ParseArrayPipe,
-  Patch,
-  Query,
-  UseGuards,
-} from '@nestjs/common';
-import { JwtGuard } from 'src/auth/guards';
+import { Controller, Get, Param, Patch, UseGuards } from '@nestjs/common';
+import { JwtGuard, RolesGuard } from 'src/auth/guards';
 import { OrdersAdminServices } from '../services';
 import { DateGuards, PriceQueryGuards, StatusGuard } from '../guards';
 
-// @UseGuards(JwtGuard)
+@UseGuards(JwtGuard)
+@UseGuards(RolesGuard)
 @Controller('orders/admin')
 export class OrdersAdminController {
   constructor(private ordersAdminServices: OrdersAdminServices) {}
