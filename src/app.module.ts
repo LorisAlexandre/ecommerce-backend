@@ -37,6 +37,7 @@ import { InvoiceModule } from './invoice/invoice.module';
     OrdersModule,
     StripeModule,
     InvoiceModule,
+    MongooseModelsModule,
   ],
   controllers: [],
   providers: [],
