@@ -43,7 +43,7 @@ export class InvoiceServices {
   <body>
     <h1>Mugensei</h1>
     <br />
-    <h2>Facture - ${String(invoiceDto.date.getDate() + 1).padStart(
+    <h2>Facture - ${String(invoiceDto.date.getDate()).padStart(
       2,
       '0',
     )}/${String(invoiceDto.date.getMonth() + 1).padStart(
