@@ -51,6 +51,6 @@ export class SignupDto {
 
   // UserSettings
   @IsObject()
-  @ValidateNested()
+  @IsOptional()
   settings?: UserSettingsDto;
 }
