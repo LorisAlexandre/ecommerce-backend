@@ -46,6 +46,7 @@ export class SignupDto {
   password: string;
 
   @IsEnum(['user', 'admin'])
+  @IsOptional()
   role: string;
 
   // UserSettings
